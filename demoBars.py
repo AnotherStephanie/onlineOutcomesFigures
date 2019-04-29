@@ -8,6 +8,8 @@ Created on Fri Apr 26 15:30:35 2019
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import rc #set rc params https://matplotlib.org/api/_as_gen/matplotlib.pyplot.rc.html
 
 
 #set up data frames using demographic numbers
@@ -26,3 +28,18 @@ dfStanding = pd.DataFrame([inPerson, Online], columns=["Non-Seniors", "Seniors"]
 dfESL =  pd.DataFrame([inPerson, Online], columns=["English Only", 
                       "English and Another", "Another language"], 
                         index=["In Person", "Online"])
+
+#a couple of tests of basic percent stacked barplots
+#using https://python-graph-gallery.com/13-percent-stacked-barplot/ for reference
+
+#Have to normalize bars by total.
+
+#Testing gender distribution stacked bars:
+barWidth = 0.85
+#names
+plt.bar([0, 1], dfGender["Women"], color='#b5ffb9', edgecolor='white', width=barWidth)
+plt.bar([0,1], dfGender["Men"], bottom=dfGender["Women"], color='#f9bc86', edgecolor='white', width=barWidth)     
+        
+        
+        
+plt.show()
