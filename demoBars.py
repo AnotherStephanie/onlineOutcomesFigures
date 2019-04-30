@@ -11,6 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc #set rc params https://matplotlib.org/api/_as_gen/matplotlib.pyplot.rc.html
 #from matplotlib.ticker import FuncFormatter
+#from matplotlib.pyplot import fig
 
 
 #defining a few functions I'll use
@@ -53,20 +54,27 @@ dfESL = makePercent(dfESL)
 
 
 #Testing gender distribution stacked bars:
-barWidth = 0.85
+barWidth = 0.1
 #names
-plt.bar([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', width=barWidth)
-plt.bar([0,1], dfGender["Women"], bottom=dfGender["Men"], color='powderblue', 
-        edgecolor='white', width=barWidth) 
+
+fig = plt.figure(1)
+ax1 = fig.add_subplot(3, 1, 1)
+ax1.barh([0, .15], dfGender["Men"], color='darkcyan', edgecolor='white', height=barWidth)
+ax1.barh([0, .15], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
+         edgecolor='white', height=barWidth) 
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
-plt.tick_params(bottom=False, left=False)   
-plt.xticks([0, 1], ["In Person", "Online"])
-plt.legend(loc='upper left', bbox_to_anchor=(1,1), ncol=1) 
+plt.tick_params(bottom=False, left=False)  
+#should make object oriented coding consistent here
+ax1.yaxis.tick_right() 
+plt.yticks([0, .15], ["In Person", "Online"])
+ax1.set_title("Course format enrollment, by gender identity", alpha=0.8)
         
         
 plt.show()
 
+
+"""
 plt.bar([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
         width=barWidth)
 plt.bar([0, 1], dfStanding["Seniors"], bottom=dfStanding["Non-Seniors"], 
@@ -77,6 +85,7 @@ for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(bottom=False, left=False) 
 
 plt.xticks([0, 1], ["In Person", "Online"]) 
+plt.title("Course format enrollment, by class standing", alpha=0.8)
            
 plt.show()
 
@@ -92,4 +101,7 @@ for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(bottom=False, left=False) 
  
 plt.xticks([0, 1], ["In Person", "Online"])  
+plt.title("Course format enrollment, by language spoken at home", alpha=0.8)
+"""
+
 plt.show()
