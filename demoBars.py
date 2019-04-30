@@ -14,6 +14,8 @@ from matplotlib import rc #set rc params https://matplotlib.org/api/_as_gen/matp
 
 #defining a few functions I'll use
 
+
+
 def makePercent(df = dfGender):
     divBy = np.sum(df, axis=1)
     df = df.divide(divBy, axis = 'rows')
@@ -56,5 +58,15 @@ plt.bar([0, 1], dfGender["Women"], color='#b5ffb9', edgecolor='white', width=bar
 plt.bar([0,1], dfGender["Men"], bottom=dfGender["Women"], color='#f9bc86', edgecolor='white', width=barWidth)     
         
         
-        
+plt.show()
+
+plt.bar([0, 1], dfStanding["Non-Seniors"], color='#b5ffb9', edgecolor='white', width=barWidth)
+plt.bar([0, 1], dfStanding["Seniors"], bottom=dfStanding["Non-Seniors"], color='#f9bc86', edgecolor='white', width=barWidth)     
+           
+plt.show()
+
+#Trouble: need process for third bar.
+plt.bar([0, 1], dfESL["English Only"], color='#b5ffb9', edgecolor='white', width=barWidth)
+plt.bar([0, 1], dfESL["English and Another"], bottom=dfESL["English Only"], color='#f9bc86', edgecolor='white', width=barWidth)     
+plt.bar([0, 1], dfESL["Another language"], bottom=dfESL["English and Another"], color='green', edgecolor='white', width=barWidth)   
 plt.show()
