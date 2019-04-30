@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc #set rc params https://matplotlib.org/api/_as_gen/matplotlib.pyplot.rc.html
+#from matplotlib.ticker import FuncFormatter
 
 
 #defining a few functions I'll use
@@ -54,25 +55,41 @@ dfESL = makePercent(dfESL)
 #Testing gender distribution stacked bars:
 barWidth = 0.85
 #names
-plt.bar([0, 1], dfGender["Women"], color='#b5ffb9', edgecolor='white', width=barWidth)
-plt.bar([0,1], dfGender["Men"], bottom=dfGender["Women"], color='#f9bc86', 
-        edgecolor='white', width=barWidth)     
+plt.bar([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', width=barWidth)
+plt.bar([0,1], dfGender["Women"], bottom=dfGender["Men"], color='powderblue', 
+        edgecolor='white', width=barWidth) 
+#removing frame and ticks
+for spine in plt.gca().spines.values(): spine.set_visible(False)
+plt.tick_params(bottom=False, left=False)   
+plt.xticks([0, 1], ["In Person", "Online"])
+plt.legend(loc='upper left', bbox_to_anchor=(1,1), ncol=1) 
         
         
 plt.show()
 
-plt.bar([0, 1], dfStanding["Non-Seniors"], color='#b5ffb9', edgecolor='white', 
+plt.bar([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
         width=barWidth)
 plt.bar([0, 1], dfStanding["Seniors"], bottom=dfStanding["Non-Seniors"], 
-        color='#f9bc86', edgecolor='white', width=barWidth)     
+        color='powderblue', edgecolor='white', width=barWidth)  
+
+#removing frame and ticks
+for spine in plt.gca().spines.values(): spine.set_visible(False)
+plt.tick_params(bottom=False, left=False) 
+
+plt.xticks([0, 1], ["In Person", "Online"]) 
            
 plt.show()
 
 #Trouble: need process for third bar.
-plt.bar([0, 1], dfESL["English Only"], color='#b5ffb9', edgecolor='white', width=barWidth)
+plt.bar([0, 1], dfESL["English Only"], color='darkcyan', edgecolor='white', width=barWidth)
 plt.bar([0, 1], dfESL["English and Another"], bottom=dfESL["English Only"], 
-        color='#f9bc86', edgecolor='white', width=barWidth)     
+        color='cadetblue', edgecolor='white', width=barWidth)     
 barBottom = np.add(dfESL["English Only"], dfESL["English and Another"]).tolist()
 plt.bar([0, 1], dfESL["Another Language"], bottom=barBottom,
-        color='green', edgecolor='white', width=barWidth)   
+        color='powderblue', edgecolor='white', width=barWidth)
+#removing frame and ticks
+for spine in plt.gca().spines.values(): spine.set_visible(False)
+plt.tick_params(bottom=False, left=False) 
+ 
+plt.xticks([0, 1], ["In Person", "Online"])  
 plt.show()
