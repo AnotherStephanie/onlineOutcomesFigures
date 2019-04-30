@@ -54,54 +54,53 @@ dfESL = makePercent(dfESL)
 
 
 #Testing gender distribution stacked bars:
-barWidth = 0.1
+barWidth = 0.85
 #names
 
-fig = plt.figure(1)
+fig = plt.figure()
+
 ax1 = fig.add_subplot(3, 1, 1)
-ax1.barh([0, .15], dfGender["Men"], color='darkcyan', edgecolor='white', height=barWidth)
-ax1.barh([0, .15], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
+ax1.barh([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', height=barWidth)
+ax1.barh([0, 1], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
          edgecolor='white', height=barWidth) 
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(bottom=False, left=False)  
 #should make object oriented coding consistent here
 ax1.yaxis.tick_right() 
-plt.yticks([0, .15], ["In Person", "Online"])
+plt.yticks([0, 1], ["In Person", "Online"])
 ax1.set_title("Course format enrollment, by gender identity", alpha=0.8)
         
-        
-plt.show()
-
-
-"""
-plt.bar([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
-        width=barWidth)
-plt.bar([0, 1], dfStanding["Seniors"], bottom=dfStanding["Non-Seniors"], 
-        color='powderblue', edgecolor='white', width=barWidth)  
+ax2 = fig.add_subplot(3, 1, 2)
+ax2.barh([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
+        height=barWidth)
+ax2.barh([0, 1], dfStanding["Seniors"], left=dfStanding["Non-Seniors"], 
+        color='powderblue', edgecolor='white', height=barWidth)  
 
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(bottom=False, left=False) 
+#again, switch to oop
+ax2.yaxis.tick_right() 
+plt.yticks([0, 1], ["In Person", "Online"])
+ax2.set_title("Course format enrollment, by class standing", alpha=0.8)
 
-plt.xticks([0, 1], ["In Person", "Online"]) 
-plt.title("Course format enrollment, by class standing", alpha=0.8)
-           
-plt.show()
-
-#Trouble: need process for third bar.
-plt.bar([0, 1], dfESL["English Only"], color='darkcyan', edgecolor='white', width=barWidth)
-plt.bar([0, 1], dfESL["English and Another"], bottom=dfESL["English Only"], 
-        color='cadetblue', edgecolor='white', width=barWidth)     
-barBottom = np.add(dfESL["English Only"], dfESL["English and Another"]).tolist()
-plt.bar([0, 1], dfESL["Another Language"], bottom=barBottom,
-        color='powderblue', edgecolor='white', width=barWidth)
+ax3 = fig.add_subplot(3,1,3)
+ax3.barh([0, 1], dfESL["English Only"], color='darkcyan', edgecolor='white', height=barWidth)
+ax3.barh([0, 1], dfESL["English and Another"], left=dfESL["English Only"], 
+        color='cadetblue', edgecolor='white', height=barWidth)     
+barLeft = np.add(dfESL["English Only"], dfESL["English and Another"]).tolist()
+ax3.barh([0, 1], dfESL["Another Language"], left = barLeft,
+        color='powderblue', edgecolor='white', height=barWidth)
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(bottom=False, left=False) 
- 
-plt.xticks([0, 1], ["In Person", "Online"])  
-plt.title("Course format enrollment, by language spoken at home", alpha=0.8)
-"""
 
+ax3.yaxis.tick_right()
+plt.yticks([0, 1], ["In Person", "Online"])  
+ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8)
+
+
+plt.tight_layout()#this cleans up padding in layout      
 plt.show()
+
