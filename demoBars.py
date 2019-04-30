@@ -12,6 +12,15 @@ import matplotlib.pyplot as plt
 from matplotlib import rc #set rc params https://matplotlib.org/api/_as_gen/matplotlib.pyplot.rc.html
 
 
+#defining a few functions I'll use
+
+def makePercent(df = dfGender):
+    divBy = np.sum(df, axis=1)
+    df = df.divide(divBy, axis = 'rows')
+    return df;
+
+
+
 #set up data frames using demographic numbers
 
 Online = {"Women":238, "Men":178, "Seniors":166, "Non-Seniors":251, 
@@ -22,6 +31,7 @@ inPerson = {"Women":316, "Men":320, "Seniors":91, "Non-Seniors":545,
 dfGender = pd.DataFrame([inPerson, Online], columns=["Men", "Women"], 
                         index=["In Person", "Online"])
 
+
 dfStanding = pd.DataFrame([inPerson, Online], columns=["Non-Seniors", "Seniors"], 
                         index=["In Person", "Online"])
 
@@ -29,10 +39,15 @@ dfESL =  pd.DataFrame([inPerson, Online], columns=["English Only",
                       "English and Another", "Another language"], 
                         index=["In Person", "Online"])
 
+dfGender = makePercent(dfGender)
+dfStanding = makePercent(dfStanding)
+dfESL = makePercent(dfESL)
+
 #a couple of tests of basic percent stacked barplots
 #using https://python-graph-gallery.com/13-percent-stacked-barplot/ for reference
 
 #Have to normalize bars by total.
+
 
 #Testing gender distribution stacked bars:
 barWidth = 0.85
