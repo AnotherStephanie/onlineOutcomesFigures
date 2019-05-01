@@ -59,7 +59,11 @@ barWidth = 0.85
 
 fig = plt.figure()
 
+
+
+#Plot 1: Gender identity
 ax1 = fig.add_subplot(3, 1, 1)
+ax1.set_facecolor('white')
 ax1.barh([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', height=barWidth)
 ax1.barh([0, 1], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
          edgecolor='white', height=barWidth) 
@@ -74,8 +78,11 @@ plt.yticks([0, 1], ["In Person", "Online"])
 ax1.set_title("Course format enrollment, by gender identity", alpha=0.8)
 
 
-        
+
+
+ #Plot 2: Class Standing       
 ax2 = fig.add_subplot(3, 1, 2)
+ax2.set_facecolor('white')
 ax2.barh([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
         height=barWidth)
 ax2.barh([0, 1], dfStanding["Seniors"], left=dfStanding["Non-Seniors"], 
@@ -90,7 +97,10 @@ plt.yticks([0, 1], ["In Person", "Online"])
 
 ax2.set_title("Course format enrollment, by class standing", alpha=0.8)
 
+
+#Plot 3: Language
 ax3 = fig.add_subplot(3,1,3)
+ax3.set_facecolor('white')
 ax3.barh([0, 1], dfESL["English Only"], color='darkcyan', edgecolor='white', height=barWidth)
 ax3.barh([0, 1], dfESL["English and Another"], left=dfESL["English Only"], 
         color='cadetblue', edgecolor='white', height=barWidth)     
@@ -107,6 +117,34 @@ ax3.yaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person", "Online"])  
 ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8)
 
+
+
+i = 0
+rects = ax1.patches
+labels = ["one", "two", "three", "four"]
+
+
+
+for rect in rects:
+    # Get X and Y placement of label from rect.
+    x_value = rect.get_x()
+    y_value = rect.get_y() +(rect.get_height()/2)
+      # Number of points between bar and label. Change to your liking.
+    space = 5
+    # Vertical alignment for positive values
+    ha = 'left'
+    
+    label = labels[i]
+    i=i+1
+   
+    ax1.annotate(
+        label,                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha=ha)                      # Horizontally align label differently for
+                 
 
 plt.tight_layout()#this cleans up padding in layout      
 plt.show()
