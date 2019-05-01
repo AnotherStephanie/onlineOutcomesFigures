@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc #set rc params https://matplotlib.org/api/_as_gen/matplotlib.pyplot.rc.html
-#from matplotlib.ticker import FuncFormatter
+from matplotlib.ticker import FuncFormatter
 #from matplotlib.pyplot import fig
 
 
@@ -64,12 +64,16 @@ ax1.barh([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', height=ba
 ax1.barh([0, 1], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
          edgecolor='white', height=barWidth) 
 #removing frame and ticks
-for spine in plt.gca().spines.values(): spine.set_visible(False)
-plt.tick_params(bottom=False, left=False)  
+for spine in plt.gca().spines.values(): spine.set_visible(False) 
+plt.tick_params(axis='x', labelbottom=False)
 #should make object oriented coding consistent here
+ax1.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y))) 
 ax1.yaxis.tick_right() 
+ax1.yaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person", "Online"])
 ax1.set_title("Course format enrollment, by gender identity", alpha=0.8)
+
+
         
 ax2 = fig.add_subplot(3, 1, 2)
 ax2.barh([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
@@ -79,10 +83,11 @@ ax2.barh([0, 1], dfStanding["Seniors"], left=dfStanding["Non-Seniors"],
 
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
-plt.tick_params(bottom=False, left=False) 
-#again, switch to oop
-ax2.yaxis.tick_right() 
+plt.tick_params(axis='x', labelbottom=False)
+ax2.yaxis.tick_right()
+ax2.yaxis.set_ticks_position('none') 
 plt.yticks([0, 1], ["In Person", "Online"])
+
 ax2.set_title("Course format enrollment, by class standing", alpha=0.8)
 
 ax3 = fig.add_subplot(3,1,3)
@@ -94,9 +99,11 @@ ax3.barh([0, 1], dfESL["Another Language"], left = barLeft,
         color='powderblue', edgecolor='white', height=barWidth)
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
-plt.tick_params(bottom=False, left=False) 
+#plt.tick_params(bottom=False, left=False) 
 
+ax3.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 ax3.yaxis.tick_right()
+ax3.yaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person", "Online"])  
 ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8)
 
