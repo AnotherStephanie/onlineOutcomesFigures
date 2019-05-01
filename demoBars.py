@@ -63,6 +63,7 @@ fig = plt.figure()
 
 #Plot 1: Gender identity
 ax1 = fig.add_subplot(3, 1, 1)
+ax1.invert_yaxis()#otherwise, barplots go from lesser to greater y
 ax1.set_facecolor('white')
 ax1.barh([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', height=barWidth)
 ax1.barh([0, 1], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
@@ -82,6 +83,7 @@ ax1.set_title("Course format enrollment, by gender identity", alpha=0.8)
 
  #Plot 2: Class Standing       
 ax2 = fig.add_subplot(3, 1, 2)
+ax2.invert_yaxis()
 ax2.set_facecolor('white')
 ax2.barh([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
         height=barWidth)
@@ -100,6 +102,7 @@ ax2.set_title("Course format enrollment, by class standing", alpha=0.8)
 
 #Plot 3: Language
 ax3 = fig.add_subplot(3,1,3)
+ax3.invert_yaxis()
 ax3.set_facecolor('white')
 ax3.barh([0, 1], dfESL["English Only"], color='darkcyan', edgecolor='white', height=barWidth)
 ax3.barh([0, 1], dfESL["English and Another"], left=dfESL["English Only"], 
@@ -121,7 +124,7 @@ ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8)
 
 i = 0
 rects = ax1.patches
-labels = ["one", "two", "three", "four"]
+labels = ["Men", "Men", "Women", "Women"]
 
 
 
@@ -145,6 +148,8 @@ for rect in rects:
         va='center',                # Vertically center label
         ha=ha)                      # Horizontally align label differently for
                  
+    
+    
 
 plt.tight_layout()#this cleans up padding in layout      
 plt.show()
