@@ -171,9 +171,21 @@ for rect in rects:
     ha = 'left'
     
     label = labels[i]
-    i=i+1
    
-    ax2.annotate(
+   
+    if i==2:
+        ax2.annotate(
+        label,                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(2, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha=ha, 
+        color='white', 
+        fontweight='bold', 
+        fontsize=12) 
+    else:
+        ax2.annotate(
         label,                      # Use `label` as label
         (x_value, y_value),         # Place label at end of the bar
         xytext=(space, 0),          # Horizontally shift label by `space`
@@ -182,7 +194,10 @@ for rect in rects:
         ha=ha, 
         color='white', 
         fontweight='bold', 
-        fontsize=16) 
+        fontsize=16)
+        
+    i=i+1
+        
 
 #label for ax3 language
 i = 0
