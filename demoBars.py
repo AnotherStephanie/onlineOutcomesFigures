@@ -57,7 +57,9 @@ dfESL = makePercent(dfESL)
 barWidth = 0.85
 #names
 
-fig = plt.figure()
+fig = plt.figure(figsize = (6, 8))
+#rcParams['axes.titlepad'] = 20 
+
 
 
 
@@ -76,7 +78,7 @@ ax1.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 ax1.yaxis.tick_right() 
 ax1.yaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person", "Online"])
-ax1.set_title("Course format enrollment, by gender identity", alpha=0.8)
+ax1.set_title("Course format enrollment, by gender identity", alpha=0.8, pad=25)
 
 
 
@@ -97,7 +99,7 @@ ax2.yaxis.tick_right()
 ax2.yaxis.set_ticks_position('none') 
 plt.yticks([0, 1], ["In Person", "Online"])
 
-ax2.set_title("Course format enrollment, by class standing", alpha=0.8)
+ax2.set_title("Course format enrollment, by class standing", alpha=0.8, pad=25)
 
 
 #Plot 3: Language
@@ -118,13 +120,13 @@ ax3.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 ax3.yaxis.tick_right()
 ax3.yaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person", "Online"])  
-ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8)
+ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8, pad=25)
 
 
-
+#label for ax1 gender
 i = 0
 rects = ax1.patches
-labels = ["Men", "Men", "Women", "Women"]
+labels = ["50.3%", "42.8%", "49.7%", "57.2%"]
 
 
 
@@ -146,11 +148,75 @@ for rect in rects:
         xytext=(space, 0),          # Horizontally shift label by `space`
         textcoords="offset points", # Interpret `xytext` as offset in points
         va='center',                # Vertically center label
-        ha=ha)                      # Horizontally align label differently for
-                 
+        ha=ha,# Horizontally align label differently for
+        color='white', 
+        fontweight='bold', 
+        fontsize=16)
+  
+               
+#label for ax2 class standing
+i = 0
+rects = ax2.patches
+labels = ["85.7%", "60.2%", "14.3%", "39.8%"]
+
+
+
+for rect in rects:
+    # Get X and Y placement of label from rect.
+    x_value = rect.get_x()
+    y_value = rect.get_y() +(rect.get_height()/2)
+      # Number of points between bar and label. Change to your liking.
+    space = 5
+    # Vertical alignment for positive values
+    ha = 'left'
     
+    label = labels[i]
+    i=i+1
+   
+    ax2.annotate(
+        label,                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha=ha, 
+        color='white', 
+        fontweight='bold', 
+        fontsize=16) 
+
+#label for ax3 language
+i = 0
+rects = ax3.patches
+labels = ["55.0%", "46.0%", "22.5%", 
+          "25.9%", "22.5%", "28.1%"]
+
+
+
+for rect in rects:
+    # Get X and Y placement of label from rect.
+    x_value = rect.get_x()
+    y_value = rect.get_y() +(rect.get_height()/2)
+      # Number of points between bar and label. Change to your liking.
+    space = 5
+    # Vertical alignment for positive values
+    ha = 'left'
+    
+    label = labels[i]
+    i=i+1
+   
+    ax3.annotate(
+        label,                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha=ha,         
+        color='white', 
+        fontweight='bold', 
+        fontsize=16) 
     
 
-plt.tight_layout()#this cleans up padding in layout      
+#plt.tight_layout()#this cleans up padding in layout     
+plt.subplots_adjust(hspace = 0.8, top = .8) 
 plt.show()
 
