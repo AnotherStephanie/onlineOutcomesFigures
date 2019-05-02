@@ -97,6 +97,7 @@ for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(axis='x', labelbottom=False)
 ax2.yaxis.tick_right()
 ax2.yaxis.set_ticks_position('none') 
+ax2.xaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person (n=636)", "Online (n=417)"])
 
 ax2.set_title("Course format enrollment, by class standing", alpha=0.8, pad=18)
@@ -115,11 +116,13 @@ ax3.barh([0, 1], dfESL["Another Language"], left = barLeft,
         color='#00B5E2', edgecolor='white', height=barWidth)
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
-#plt.tick_params(bottom=False, left=False) 
+plt.tick_params(bottom=False, left=False) 
 
-ax3.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
+#ax3.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 ax3.yaxis.tick_right()
 ax3.yaxis.set_ticks_position('none')
+ax3.set_xticklabels([])
+ax3.xaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person (n=636)", "Online (n=417)"])  
 ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8, pad=18)
 
@@ -344,7 +347,7 @@ x_value = rects[3].get_x()+rects[3].get_width()/2
 y_value = rect.get_y()-.1
 
 ax3.annotate(
-        "English And Another",                      # Use `label` as label
+        "English & Another",                      # Use `label` as label
         (x_value, y_value),         # Place label at end of the bar
         xytext=(space, 0),          # Horizontally shift label by `space`
         textcoords="offset points", # Interpret `xytext` as offset in points
