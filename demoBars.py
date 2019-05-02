@@ -78,7 +78,7 @@ ax1.yaxis.tick_right()
 ax1.yaxis.set_ticks_position('none')
 ax1.xaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person (n=636)", "Online (n=416)"])
-ax1.set_title("Course format enrollment, by gender identity", alpha=0.8, pad=25)
+ax1.set_title("Course format enrollment, by gender identity", alpha=0.8, pad=18)
 
 
 
@@ -99,19 +99,20 @@ ax2.yaxis.tick_right()
 ax2.yaxis.set_ticks_position('none') 
 plt.yticks([0, 1], ["In Person (n=636)", "Online (n=417)"])
 
-ax2.set_title("Course format enrollment, by class standing", alpha=0.8, pad=25)
+ax2.set_title("Course format enrollment, by class standing", alpha=0.8, pad=18)
+
 
 
 #Plot 3: Language
 ax3 = fig.add_subplot(3,1,3)
 ax3.invert_yaxis()
 ax3.set_facecolor('white')
-ax3.barh([0, 1], dfESL["English Only"], color='darkcyan', edgecolor='white', height=barWidth)
+ax3.barh([0, 1], dfESL["English Only"], color='#5B7F95', edgecolor='white', height=barWidth)
 ax3.barh([0, 1], dfESL["English and Another"], left=dfESL["English Only"], 
-        color='cadetblue', edgecolor='white', height=barWidth)     
+        color='#008EAA', edgecolor='white', height=barWidth)     
 barLeft = np.add(dfESL["English Only"], dfESL["English and Another"]).tolist()
 ax3.barh([0, 1], dfESL["Another Language"], left = barLeft,
-        color='powderblue', edgecolor='white', height=barWidth)
+        color='#00B5E2', edgecolor='white', height=barWidth)
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
 #plt.tick_params(bottom=False, left=False) 
@@ -120,7 +121,7 @@ ax3.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 ax3.yaxis.tick_right()
 ax3.yaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person (n=636)", "Online (n=417)"])  
-ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8, pad=25)
+ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8, pad=18)
 
 
 #label for ax1 gender
@@ -194,8 +195,8 @@ ax1.annotate(
 #label for ax2 class standing
 i = 0
 rects = ax2.patches
-labels = ["85.7% Underclassmen", "60.2% Underclassmen",
-          "14.3% \nSeniors", "39.8% Seniors"]
+labels = ["85.7%", "60.2%",
+          "14.3% ", "39.8%"]
 
 
 
@@ -235,14 +236,50 @@ for rect in rects:
         fontsize=14)
         
     i=i+1
+    
+#top titles
+    
+rect=rects[0]
+
+x_value = (rect.get_x()+rect.get_width())/2
+y_value = rect.get_y()-.1    
+
+ax2.annotate(
+        "Underclassmen",                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha="center",# Horizontally align label differently for
+        color='#008EAA', 
+        #fontweight='bold',
+        fontsize=13)
+
+# women title on top of respective rectangle
+rect=rects[2]
+
+x_value = rect.get_x()+(rect.get_width())/2
+y_value = rect.get_y()-.1
+
+ax2.annotate(
+        "Seniors",                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha="center",
+        color='#00B5E2', 
+        #fontweight='bold',
+        fontsize=13)
+
         
 
 #label for ax3 language
 i = 0
 rects = ax3.patches
-labels = ["55.0% English Only", "46.0% English Only", 
-          "22.5% English \nand Another", "25.9% English \nand Another", 
-          "22.5% Another \nLanguage", "28.1% Another \nlanguage"]
+labels = ["55.0%", "46.0%", 
+          "22.5%", "25.9%", 
+          "22.5%", "28.1%"]
 
 
 
@@ -281,7 +318,57 @@ for rect in rects:
         fontsize=12) 
      
     i=i+1
+
+#top titles
     
+rect=rects[0]
+
+x_value = (rect.get_x()+rects[1].get_width())/2
+y_value = rect.get_y()-.1    
+
+ax3.annotate(
+        "English Only",                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha="center",# Horizontally align label differently for
+        color='#5B7F95', 
+        #fontweight='bold',
+        fontsize=13)
+
+# English and Aother title on top of respective rectangle
+rect=rects[2]
+
+x_value = rects[3].get_x()+rects[3].get_width()/2
+y_value = rect.get_y()-.1
+
+ax3.annotate(
+        "English And Another",                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha="center",
+        color='#008EAA', 
+        #fontweight='bold',
+        fontsize=13)   
+
+rect=rects[4]
+
+x_value = rect.get_x()+(rect.get_width())/2
+y_value = rect.get_y()-.1
+
+ax3.annotate(
+        "Another Language",                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha="center",
+        color='#00B5E2', 
+        #fontweight='bold',
+        fontsize=12) 
 
 #plt.tight_layout()#this cleans up padding in layout     
 plt.subplots_adjust(hspace = 0.8, top = .8) 
