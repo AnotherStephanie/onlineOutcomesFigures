@@ -24,6 +24,32 @@ def makePercent(df = dfGender):
     return df;
 
 
+def makeLabels(myAx, myLabels):
+    i = 0
+    rects = myAx.patches
+    
+    for rect in rects:
+        # Get X and Y placement of label from rect.
+        x_value = rect.get_x()
+        y_value = rect.get_y() +(rect.get_height()/2)
+        # Number of points between bar and label. Change to your liking.
+        space = 5
+        # Vertical alignment for positive values
+        ha = 'left'
+    
+        label = labels[i]
+        i=i+1
+   
+        myAx.annotate(
+        label,                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha=ha) 
+    return;    
+    
+
 
 #set up data frames using demographic numbers
 
@@ -122,9 +148,18 @@ ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8)
 
 
 
+
+
+makeLabels(ax1, ["Men1", "Men2", "Women1", "Women2"])
+
+#makeLabels(ax2, ["One", "Men2", "Women1", "Women2"])
+
+makeLabels(ax3, ["one", "two", "three", "four", "five"])
+
+"""
 i = 0
 rects = ax1.patches
-labels = ["Men", "Men", "Women", "Women"]
+#labels = ["Men", "Men", "Women", "Women"]
 
 
 
@@ -148,8 +183,8 @@ for rect in rects:
         va='center',                # Vertically center label
         ha=ha)                      # Horizontally align label differently for
                  
-    
-    
+   
+   """ 
 
 plt.tight_layout()#this cleans up padding in layout      
 plt.show()
