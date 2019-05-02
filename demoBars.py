@@ -66,8 +66,8 @@ fig = plt.figure(figsize = (8, 8))
 ax1 = fig.add_subplot(3, 1, 1)
 ax1.invert_yaxis()#otherwise, barplots go from lesser to greater y
 ax1.set_facecolor('white')
-ax1.barh([0, 1], dfGender["Men"], color='darkcyan', edgecolor='white', height=barWidth)
-ax1.barh([0, 1], dfGender["Women"], left=dfGender["Men"], color='powderblue', 
+ax1.barh([0, 1], dfGender["Men"], color='#008EAA', edgecolor='white', height=barWidth)
+ax1.barh([0, 1], dfGender["Women"], left=dfGender["Men"], color='#00B5E2', 
          edgecolor='white', height=barWidth) 
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False) 
@@ -76,6 +76,7 @@ plt.tick_params(axis='x', labelbottom=False)
 ax1.xaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y))) 
 ax1.yaxis.tick_right() 
 ax1.yaxis.set_ticks_position('none')
+ax1.xaxis.set_ticks_position('none')
 plt.yticks([0, 1], ["In Person (n=636)", "Online (n=416)"])
 ax1.set_title("Course format enrollment, by gender identity", alpha=0.8, pad=25)
 
@@ -86,10 +87,10 @@ ax1.set_title("Course format enrollment, by gender identity", alpha=0.8, pad=25)
 ax2 = fig.add_subplot(3, 1, 2)
 ax2.invert_yaxis()
 ax2.set_facecolor('white')
-ax2.barh([0, 1], dfStanding["Non-Seniors"], color='darkcyan', edgecolor='white', 
+ax2.barh([0, 1], dfStanding["Non-Seniors"], color='#008EAA', edgecolor='white', 
         height=barWidth)
 ax2.barh([0, 1], dfStanding["Seniors"], left=dfStanding["Non-Seniors"], 
-        color='powderblue', edgecolor='white', height=barWidth)  
+        color='#00B5E2', edgecolor='white', height=barWidth)  
 
 #removing frame and ticks
 for spine in plt.gca().spines.values(): spine.set_visible(False)
@@ -125,7 +126,7 @@ ax3.set_title("Course format enrollment, by language spoken at home", alpha=0.8,
 #label for ax1 gender
 i = 0
 rects = ax1.patches
-labels = ["50.3% Men", "42.8% Men", "49.7% Women", "57.2% Women"]
+labels = ["50.3%", "42.8%", "49.7%", "57.2%"]
 
 
 for rect in rects:
@@ -155,7 +156,7 @@ for rect in rects:
 rect=rects[0]
 
 x_value = (rect.get_x()+rect.get_width())/2
-y_value = rect.get_y()
+y_value = rect.get_y()-.1
 
 ax1.annotate(
         "Men",                      # Use `label` as label
@@ -163,12 +164,27 @@ ax1.annotate(
         xytext=(space, 0),          # Horizontally shift label by `space`
         textcoords="offset points", # Interpret `xytext` as offset in points
         va='center',                # Vertically center label
-        ha=ha,# Horizontally align label differently for
-        color='darkcyan', 
-        fontweight='bold',
-        fontsize=12)
+        ha="center",# Horizontally align label differently for
+        color='#008EAA', 
+        #fontweight='bold',
+        fontsize=13)
 
+# women title on top of respective rectangle
+rect=rects[2]
 
+x_value = rect.get_x()+(rect.get_width())/2
+y_value = rect.get_y()-.1
+
+ax1.annotate(
+        "Women",                      # Use `label` as label
+        (x_value, y_value),         # Place label at end of the bar
+        xytext=(space, 0),          # Horizontally shift label by `space`
+        textcoords="offset points", # Interpret `xytext` as offset in points
+        va='center',                # Vertically center label
+        ha="center",
+        color='#00B5E2', 
+        #fontweight='bold',
+        fontsize=13)
 
 
 
