@@ -375,5 +375,5 @@ ax3.annotate(
 
 #plt.tight_layout()#this cleans up padding in layout     
 plt.subplots_adjust(hspace = 0.8, top = .8) 
-plt.show()
-
+#plt.show()
+plt.savefig('demographics.png', dpi = 300, bbox_inches="tight")

@@ -59,3 +59,5 @@ plt.yticks([76, 78, 80, 82, 84, 86, 88, 90, 92],
 plt.xticks(alpha = 0.8)
 plt.legend(fontsize='xx-small', loc=1, frameon=False)
 #plt.ylim(70, 100)
+
+plt.savefig('timeSeries.png', dpi=300, bbox_inches="tight")
