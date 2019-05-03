@@ -44,15 +44,18 @@ plt.plot(df["Year"], df["Online Weighted"], '-', marker=".",
 plt.gca().fill_between(df["Year"], 
                        df["Face-to-Face Weighted"], df["Online Weighted"], 
                        facecolor='#F0DD99', 
-                       alpha=0.2, zorder = 1, label='_nolegend_')
+                       alpha=0.5, 
+                       zorder = 1, label='_nolegend_')
 
 
 #Formatting
-plt.title("Average Grades in SAS25V, In Person and Online", alpha=0.8)
+plt.title("Average Grades in SAS25, In Person and Online", alpha=0.8)
 for spine in plt.gca().spines.values(): spine.set_visible(False)
 plt.tick_params(bottom=False, left=False)
 
-plt.yticks(alpha = 0.8)
+plt.yticks([76, 78, 80, 82, 84, 86, 88, 90, 92], 
+           ["76%", "78%", "80%", "82%", "84%", "86%", "88%", "90%", "92%"], 
+           alpha = 0.8)
 plt.xticks(alpha = 0.8)
 plt.legend(fontsize='xx-small', loc=1, frameon=False)
 #plt.ylim(70, 100)
