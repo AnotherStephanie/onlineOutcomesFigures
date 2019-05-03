@@ -15,9 +15,11 @@ df = pd.read_csv("timeseries_raw_corrected.csv")
 
 
 #Creates plot visual
-plt.figure(figsize = (10,4))
-
+plt.figure(figsize = (10,4), facecolor=None)
+ax=plt.gca()
+ax.set_facecolor('white')
 #lines for online and face to face
+
 plt.plot(df["Year"], df["Face-to-Face Average"],  '-', zorder = 2, 
          color="black", linewidth = 1.0, alpha=0.4, 
          label='In-Person Average', linestyle="dashed")
@@ -33,6 +35,7 @@ plt.plot(df["Year"], df["Online Weighted"], '-',
          label='Online Average')
 
 
+
 # fill the area between the weighted values
 plt.gca().fill_between(df["Year"], 
                        df["Face-to-Face Weighted"], df["Online Weighted"], 
@@ -43,8 +46,9 @@ plt.gca().fill_between(df["Year"],
 #Formatting
 plt.title("Average Grades in SAS25V, In Person and Online", alpha=0.8)
 for spine in plt.gca().spines.values(): spine.set_visible(False)
-plt.tick_params(bottom='off', left='off')
+plt.tick_params(bottom=False, left=False)
 
 plt.yticks(alpha = 0.8)
 plt.xticks(alpha = 0.8)
 plt.legend(fontsize='xx-small', loc=1, frameon=False)
+#plt.ylim(70, 100)
