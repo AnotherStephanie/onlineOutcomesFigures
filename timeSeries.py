@@ -20,27 +20,31 @@ ax=plt.gca()
 ax.set_facecolor('white')
 #lines for online and face to face
 
-plt.plot(df["Year"], df["Face-to-Face Average"],  '-', zorder = 2, 
-         color="black", linewidth = 1.0, alpha=0.4, 
-         label='In-Person Average', linestyle="dashed")
-plt.plot(df["Year"], df["Online Average"], '-', 
-         zorder = 2, color="blue", linewidth = 1.0, alpha=0.4, 
-         label='Online Average', linestyle="dashed")
 
-plt.plot(df["Year"], df["Face-to-Face Weighted"],  '-', zorder = 2, 
-         color="black", linewidth = 1.0, alpha=0.6, 
-         label='In-Person Weighted')
-plt.plot(df["Year"], df["Online Weighted"], '-', 
-         zorder = 2, color="blue", linewidth = 1.0, alpha=0.6, 
-         label='Online Average')
+
+
+plt.plot(df["Year"], df["Face-to-Face Average"],  '-', marker=".", zorder = 2, 
+         color="#5B7F95", linewidth = 1.0, alpha=0.4, 
+         label='In-Person Average', linestyle="dashed")
+plt.plot(df["Year"], df["Face-to-Face Weighted"],  '-', marker=".", zorder = 2, 
+         color="#5B7F95", linewidth = 3.0, alpha=0.6, 
+         label='In-Person Weighted Average')
+
+plt.plot(df["Year"], df["Online Average"], '-', marker=".",
+         zorder = 2, color="#008EAA", linewidth = 1.0, alpha=0.4, 
+         label='Online Average', linestyle="dashed")
+plt.plot(df["Year"], df["Online Weighted"], '-', marker=".",
+         zorder = 2, color="#008EAA", linewidth = 3.0, alpha=0.6, 
+         label='Online Weighted Average')
+
 
 
 
 # fill the area between the weighted values
 plt.gca().fill_between(df["Year"], 
                        df["Face-to-Face Weighted"], df["Online Weighted"], 
-                       facecolor='black', 
-                       alpha=0.25, zorder = 1, label='_nolegend_')
+                       facecolor='#F0DD99', 
+                       alpha=0.2, zorder = 1, label='_nolegend_')
 
 
 #Formatting
